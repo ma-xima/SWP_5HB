@@ -1,20 +1,23 @@
 package refactorMe;
 
-
-
+/**
+ * Rechteck mit width und height
+ * 
+ * Refactoring: Unnotiges entfernt, Konstruktor vereinfacht -> da extends Geometry
+ * Sysout durch IllegalArgumentException ersetzt und Aussage besser formuliert
+ * Saubere Kapselung -> getWidth getHeight
+ */
 public class Rectangle extends Geometry {
 
-	private int id = -1;
 	private final double width;
 	private final double height;
 
 	protected Rectangle(int id, double width, double height, boolean filled, String color) throws IdException {
-		super(id, width, height, filled, color);
+		super(id, filled, color);
 
 		if (width < 0 || height < 0) {
-			System.out.println("Value less than zero not allowed!");
+			throw new IllegalArgumentException("Width and height must not be negative!");
 		}
-		this.id = id;
 		this.width = width;
 		this.height = height;
 	}
@@ -29,6 +32,11 @@ public class Rectangle extends Geometry {
 		return 2 * (width + height);
 	}
 
-}
+	public double getWidth() {
+		return width;
+	}
 
-//Exception werfen
+	public double getHeight() {
+		return height;
+	}
+}

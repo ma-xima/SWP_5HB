@@ -1,41 +1,29 @@
 package refactorMe;
-
-
-
 /**
- * Stellt einen Kreis dar.
+ * Kreis mit Radius
+ * Refactoring: Attribute die in der Oberklasse verwendet werden wurden entfernt -> nicht mehr notwendig hier
+ * Fehrlerhafte id Prüfung entfernt
+ * Exceptions anstatt Sysout-> bessere Fehlerbehandlung
+ * Prüfen ob Radius unter 0 -> Fehlerverhinderung
  * 
- * Refactoring:
- * - Redundante Felder (id, filled, color) entfernt, da sie schon in Geometry sind
  */
 public class Circle extends Geometry {
 
 	private double radius;
 
-	/**
-	 * Erstellt einen Kreis.
-	 * 
-	 * Refactoring: Validierung des Radius VOR super().
-	 * Ungültige Werte führen sofort zu einem Fehler.
-	 */
 	protected Circle(int id, double radius, boolean filled, String color) throws IdException {
 		super(id, filled, color);
 		
 		if (radius < 0) {
-			throw new IllegalArgumentException("Radius less than zero not allowed!");
+			throw new IllegalArgumentException("Radius less than zero!");
 		}
 		this.radius = radius;
 	}
 
-	/**
-	 * Setzt den Radius.
-	 * 
-	 * Refactoring: Validierung hinzugefügt statt nur zu drucken.
-	 * Negative Werte werden mit Exception verhindert.
-	 */
+
 	public void setRadius(double radius) {
 		if (radius < 0) {
-			throw new IllegalArgumentException("Radius less than zero not allowed!");
+			throw new IllegalArgumentException("Radius less than zero");
 		}
 		this.radius = radius;
 	}
